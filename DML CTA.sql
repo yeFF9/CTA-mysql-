@@ -1,0 +1,132 @@
+USE CTA;
+
+INSERT INTO Categoria (nome) VALUES 
+('Banco de Dados'), 
+('Engenharia de Software'), 
+('Programação Web'), 
+('Segurança da Informação'), 
+('Inteligência Artificial');
+
+INSERT INTO Professor (nome, cpf, email, senha, data_nascimento, mini_curriculo, percentual_comissao) VALUES
+('Carlos Silva', '11122233344', 'carlos@cta.com', 'hash123', '1980-05-12', 'Mestre em BD.', 50.00),
+('Ana Souza', '22233344455', 'ana@cta.com', 'hash123', '1985-08-22', 'Doutora em IA.', 60.00),
+('Marcos Paulo', '33344455566', 'marcos@cta.com', 'hash123', '1990-11-10', 'Engenheiro de Software Sênior.', 40.00),
+('Juliana Mendes', '44455566677', 'juliana@cta.com', 'hash123', '1988-02-15', 'Especialista em Web.', 45.00),
+('Roberto Costa', '55566677788', 'roberto@cta.com', 'hash123', '1975-12-30', 'Consultor de Segurança.', 70.00);
+
+INSERT INTO Curso (titulo, descricao, carga_horaria, preco_base, data_publicacao, id_categoria, id_professor, total_alunos) VALUES
+('PostgreSQL Avançado', 'Modelagem e tuning', 40, 150.00, '2025-01-10', 1, 1, 3),
+('Introdução ao MySQL', 'Consultas básicas', 20, 80.00, '2025-02-15', 1, 1, 2),
+('Qualidade de Software', 'Testes e métricas', 30, 120.00, '2025-03-01', 2, 3, 4),
+('Arquitetura Limpa', 'Boas práticas', 50, 200.00, '2025-03-10', 2, 3, 1),
+('React do Zero', 'Frontend moderno', 60, 250.00, '2025-04-05', 3, 4, 3),
+('Node.js na Prática', 'Backend com JS', 45, 180.00, '2025-04-20', 3, 4, 2),
+('Pentest Básico', 'Invasão ética', 40, 300.00, '2025-05-10', 4, 5, 2),
+('Criptografia Aplicada', 'Protegendo dados', 35, 220.00, '2025-05-15', 4, 5, 1),
+('Machine Learning', 'Modelos preditivos', 80, 400.00, '2025-06-01', 5, 2, 3),
+('Deep Learning', 'Redes neurais', 100, 500.00, '2025-06-15', 5, 2, 1);
+
+INSERT INTO Aluno (nome, cpf, email, senha, data_nascimento) VALUES
+('Lucas Almeida', '00100200304', 'lucas@email.com', 'senha123', '2000-01-15'),
+('Mariana Dias', '00200300405', 'mariana@email.com', 'senha123', '1998-04-20'),
+('Pedro Rocha', '00300400506', 'pedro@email.com', 'senha123', '2001-07-10'),
+('Fernanda Lima', '00400500607', 'fernanda@email.com', 'senha123', '1999-11-25'),
+('João Silva', '00500600708', 'joao@email.com', 'senha123', '2002-03-30'),
+('Beatriz Costa', '00600700809', 'beatriz@email.com', 'senha123', '1997-09-05'),
+('Gabriel Santos', '00700800910', 'gabriel@email.com', 'senha123', '2000-12-12'),
+('Camila Nunes', '00800901011', 'camila@email.com', 'senha123', '1996-05-18'),
+('Rafael Gomes', '00901001112', 'rafael@email.com', 'senha123', '1995-08-08'),
+('Amanda Castro', '01001101213', 'amanda@email.com', 'senha123', '2003-02-14'),
+('Thiago Melo', '01101201314', 'thiago@email.com', 'senha123', '2001-06-22'),
+('Larissa Reis', '01201301415', 'larissa@email.com', 'senha123', '1998-10-03'),
+('Diego Moura', '01301401516', 'diego@email.com', 'senha123', '1999-01-29'),
+('Renata Alves', '01401501617', 'renata@email.com', 'senha123', '2000-07-17'),
+('Bruno Ribeiro', '01501601718', 'bruno@email.com', 'senha123', '1997-12-05'),
+('Tatiana Moraes', '01601701819', 'tatiana@email.com', 'senha123', '1996-03-08'),
+('Vitor Barbosa', '01701801920', 'vitor@email.com', 'senha123', '2002-09-21'),
+('Letícia Farias', '01801902021', 'leticia@email.com', 'senha123', '2001-11-11'),
+('Igor Martins', '01902002122', 'igor@email.com', 'senha123', '1998-02-28'),
+('Vanessa Cardoso', '02002102223', 'vanessa@email.com', 'senha123', '1995-06-16');
+
+INSERT INTO Matricula (id_aluno, id_curso, status, progresso, valor_comissao, valor_plataforma) VALUES
+(1, 1, 'Ativa', 50.00, 75.00, 75.00),
+(2, 1, 'Concluida', 100.00, 75.00, 75.00),
+(3, 1, 'Ativa', 10.00, 75.00, 75.00),
+(4, 2, 'Ativa', 25.00, 40.00, 40.00),
+(5, 2, 'Cancelada', 0.00, 40.00, 40.00),
+(6, 3, 'Concluida', 100.00, 48.00, 72.00),
+(7, 3, 'Ativa', 60.00, 48.00, 72.00),
+(8, 3, 'Ativa', 80.00, 48.00, 72.00),
+(9, 3, 'Ativa', 10.00, 48.00, 72.00),
+(10, 4, 'Concluida', 100.00, 80.00, 120.00),
+(11, 5, 'Ativa', 30.00, 112.50, 137.50),
+(12, 5, 'Ativa', 45.00, 112.50, 137.50),
+(13, 5, 'Concluida', 100.00, 112.50, 137.50),
+(14, 6, 'Ativa', 20.00, 81.00, 99.00),
+(15, 6, 'Ativa', 90.00, 81.00, 99.00),
+(16, 7, 'Cancelada', 5.00, 210.00, 90.00),
+(17, 7, 'Ativa', 15.00, 210.00, 90.00),
+(18, 8, 'Concluida', 100.00, 154.00, 66.00),
+(19, 9, 'Ativa', 70.00, 240.00, 160.00),
+(20, 9, 'Concluida', 100.00, 240.00, 160.00),
+(1, 9, 'Ativa', 40.00, 240.00, 160.00),
+(2, 10, 'Ativa', 10.00, 300.00, 200.00),
+(3, 4, 'Ativa', 5.00, 80.00, 120.00),
+(4, 5, 'Concluida', 100.00, 112.50, 137.50),
+(5, 7, 'Ativa', 50.00, 210.00, 90.00);
+
+INSERT INTO Pagamento (id_matricula, valor_final, metodo, data_vencimento, status) VALUES
+(1, 150.00, 'Cartao', '2025-01-15', 'Pago'),
+(2, 150.00, 'Pix', '2025-01-20', 'Pago'),
+(3, 150.00, 'Boleto', '2025-01-25', 'Pendente'),
+(4, 80.00, 'Cartao', '2025-02-20', 'Pago'),
+(5, 80.00, 'Pix', '2025-02-22', 'Atrasado'),
+(6, 120.00, 'Cartao', '2025-03-05', 'Pago'),
+(7, 120.00, 'Boleto', '2025-03-10', 'Atrasado'),
+(8, 120.00, 'Pix', '2025-03-15', 'Pago'),
+(9, 120.00, 'Cartao', '2025-03-20', 'Pendente'),
+(10, 200.00, 'Cartao', '2025-03-15', 'Pago'),
+(11, 250.00, 'Pix', '2025-04-10', 'Pago'),
+(12, 250.00, 'Boleto', '2025-04-15', 'Atrasado'),
+(13, 250.00, 'Cartao', '2025-04-20', 'Pago'),
+(14, 180.00, 'Pix', '2025-04-25', 'Pago'),
+(15, 180.00, 'Boleto', '2025-04-30', 'Pendente'),
+(16, 300.00, 'Cartao', '2025-05-15', 'Atrasado'),
+(17, 300.00, 'Pix', '2025-05-20', 'Pago'),
+(18, 220.00, 'Cartao', '2025-05-20', 'Pago'),
+(19, 400.00, 'Boleto', '2025-06-05', 'Atrasado'),
+(20, 400.00, 'Pix', '2025-06-10', 'Pago'),
+(21, 400.00, 'Cartao', '2025-06-15', 'Pago'),
+(22, 500.00, 'Cartao', '2025-06-20', 'Pendente'),
+(23, 200.00, 'Pix', '2025-03-25', 'Pago'),
+(24, 250.00, 'Cartao', '2025-04-25', 'Pago'),
+(25, 300.00, 'Boleto', '2025-05-25', 'Atrasado');
+
+INSERT INTO Avaliacao (id_matricula, nota, comentario) VALUES
+(2, 5, 'Excelente curso, aprendi muito!'),
+(6, 4, 'Muito bom, mas poderia ter mais exercícios.'),
+(10, 5, 'O professor domina muito o assunto.'),
+(13, 3, 'Achei o ritmo um pouco rápido.'),
+(18, 5, 'Melhor curso de criptografia que já fiz.'),
+(20, 4, 'Conteúdo denso, mas muito recompensador.'),
+(24, 5, 'Sensacional, recomendo a todos!'),
+(1, 4, 'Estou gostando bastante até agora.'),
+(7, 2, 'Não gostei da didática.'),
+(11, 5, 'Material de apoio excelente.');
+
+INSERT INTO Log_Acesso (id_aluno, id_curso, data_inicio, data_fim) VALUES
+(1, 1, '2025-01-16 14:00:00', '2025-01-16 15:30:00'),
+(2, 1, '2025-01-21 09:00:00', '2025-01-21 11:00:00'),
+(6, 3, '2025-03-06 19:00:00', '2025-03-06 20:45:00'),
+(10, 4, '2025-03-16 10:00:00', '2025-03-16 12:15:00'),
+(13, 5, '2025-04-21 15:00:00', '2025-04-21 17:30:00'),
+(18, 8, '2025-05-21 08:00:00', '2025-05-21 09:30:00'),
+(20, 9, '2025-06-11 20:00:00', '2025-06-11 22:00:00'),
+(1, 9, '2025-06-16 14:00:00', '2025-06-16 16:00:00'),
+(4, 2, '2025-02-21 18:00:00', '2025-02-21 19:00:00'),
+(7, 3, '2025-03-11 21:00:00', '2025-03-11 22:30:00'),
+(11, 5, '2025-04-11 16:00:00', '2025-04-11 18:00:00'),
+(14, 6, '2025-04-26 13:00:00', '2025-04-26 14:45:00'),
+(17, 7, '2025-05-21 19:00:00', '2025-05-21 21:00:00'),
+(19, 9, '2025-06-06 10:00:00', '2025-06-06 12:00:00'),
+(2, 10, '2025-06-21 09:00:00', '2025-06-21 10:30:00');
