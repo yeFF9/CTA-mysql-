@@ -1,0 +1,40 @@
+1 - Estratégia de Segurança
+A proteção do banco de dados será baseada em camadas de defesa, focando principalmente no controle de acesso e na integridade das conexões.
+
+Princípio do Menor Privilégio (Controle de Acesso): A aplicação da CTA jamais se conectará ao banco de dados utilizando o superusuário (root).
+Serão criados usuários distintos no MySQL dependendo do contexto.
+A aplicação web terá um usuário próprio (cta_app) com permissões restritas apenas para manipular dados (DML: SELECT, INSERT, UPDATE, DELETE), sendo estritamente proibido de alterar estruturas de tabelas (DDL).
+Segurança de Dados em Trânsito e em Repouso:
+A comunicação entre o servidor web e o banco de dados ocorrerá exclusivamente sob um canal criptografado via TLS/SSL, evitando a interceptação de dados financeiros.
+Além disso, atributos sensíveis (como as senhas dos alunos e professores na tabela) não serão armazenadas em texto plano, dependendo da aplicação para enviar o dado já anonimizado via funções de hash (como bcrypt).
+Defesa Ativa (Prepared Statements):
+Para evitar vulnerabilidades de SQL Injection, todas as consultas enviadas pela aplicação para o banco deverão ser parametrizadas (Prepared Statements),
+garantindo que entradas maliciosas em formulários não consigam alterar a árvore de execução estruturada no MySQL.
+
+-- Criando o usuário para a aplicação web e garantindo apenas os privilégios necessários
+CREATE USER 'cta_app'@'localhost' IDENTIFIED BY 'senha_forte_123456';
+GRANT SELECT, INSERT, UPDATE, DELETE ON CTA.* TO 'cta_app'@'localhost';
+FLUSH PRIVILEGES;
+
+
+
+2- Estratégia de backup
+Comandos de Execução no Prompt de Comando (CMD) do Windows
+Para demonstrar a execução prática dessa estratégia, os seguintes comandos devem ser executados no Prompt de Comando (cmd.exe) ou em um arquivo de lote (.bat) programado no Agendador de Tarefas.
+
+- Comando para o Backup Completo (Dados e Estrutura):
+Este comando salva toda a base de dados, incluindo os dados dos alunos e os gatilhos, em uma pasta de backups na unidade C.
+
+mysqldump -u root -p --routines --triggers CTA > C:\Backups\CTA\backup_cta_completo.sql
+
+- Comando para Backup Apenas da Estrutura (Sem Dados):
+Caso a equipe de desenvolvimento precise apenas do esqueleto do banco de dados (tabelas, views e functions) para um ambiente de homologação, o parâmetro --no-data é utilizado.
+
+mysqldump -u root -p --no-data --routines --triggers CTA > C:\Backups\CTA\backup_cta_estrutura.sql
+
+- Comando para Restauração (Recovery):
+Em caso de falha do servidor, o comando abaixo injeta o arquivo de backup de volta para o MySQL, restaurando todo o ambiente operacional.
+
+mysql -u root -p CTA < C:\Backups\CTA\backup_cta_completo.sql
+
+(Nota: Certifique-se de que a pasta C:\Backups\CTA\ esteja criada no Windows antes de executar a geração dos arquivos, ou o CMD retornará um erro de diretório não encontrado).
