@@ -1,0 +1,49 @@
+CREATE SCHEMA IF NOT EXISTS DW_CTA;
+USE DW_CTA;
+
+-- Criando as Dimensões
+CREATE TABLE Dim_Tempo (
+    id_tempo INT PRIMARY KEY,
+    data_completa DATE,
+    ano INT,
+    semestre INT,
+    trimestre INT,
+    mes INT,
+    dia_semana VARCHAR(20)
+);
+
+CREATE TABLE Dim_Aluno (
+    id_aluno INT PRIMARY KEY,
+    faixa_etaria VARCHAR(20),
+    estado_origem VARCHAR(2),
+    cidade VARCHAR(100)
+);
+
+CREATE TABLE Dim_Curso (
+    id_curso INT PRIMARY KEY,
+    titulo_curso VARCHAR(150),
+    nome_categoria VARCHAR(50),
+    carga_horaria_faixa VARCHAR(50)
+);
+
+CREATE TABLE Dim_Professor (
+    id_professor INT PRIMARY KEY,
+    nome_professor VARCHAR(100),
+    faixa_percentual_comissao VARCHAR(20)
+);
+
+-- Criando a Tabela Fato
+CREATE TABLE Fato_Vendas (
+    id_fato INT AUTO_INCREMENT PRIMARY KEY,
+    id_tempo INT NOT NULL,
+    id_aluno INT NOT NULL,
+    id_curso INT NOT NULL,
+    id_professor INT NOT NULL,
+    valor_faturado DECIMAL(10,2),
+    valor_comissao DECIMAL(10,2),
+    quantidade INT DEFAULT 1,
+    CONSTRAINT fk_fato_tempo FOREIGN KEY (id_tempo) REFERENCES Dim_Tempo(id_tempo),
+    CONSTRAINT fk_fato_aluno FOREIGN KEY (id_aluno) REFERENCES Dim_Aluno(id_aluno),
+    CONSTRAINT fk_fato_curso FOREIGN KEY (id_curso) REFERENCES Dim_Curso(id_curso),
+    CONSTRAINT fk_fato_professor FOREIGN KEY (id_professor) REFERENCES Dim_Professor(id_professor)
+);
